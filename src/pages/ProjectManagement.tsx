@@ -172,7 +172,11 @@ const mockProjects = [
   }
 ];
 
+import { useNavigate } from 'react-router-dom';
+
 export default function ProjectManagement() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] p-6 text-[#111]">
       <h1 className="text-xl font-bold mb-6 text-[#111]">项目管理</h1>
@@ -253,7 +257,10 @@ export default function ProjectManagement() {
                   <td className="py-4 px-4 font-bold text-[#111]">{project.stats.rtc}</td>
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-2">
-                      <button className="flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
+                      <button 
+                        className="flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                        onClick={() => navigate(`/projects/${project.id}`)}
+                      >
                         <ExternalLink size={12} className="text-gray-400" />
                         详情
                       </button>
