@@ -258,7 +258,7 @@ export default function ProjectManagement() {
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-2">
                       <button 
-                        className="flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-1 px-3 py-1.5 text-[12px] font-medium text-gray-600 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap"
                         onClick={() => navigate(`/projects/${project.id}`)}
                       >
                         <ExternalLink size={12} className="text-gray-400" />
