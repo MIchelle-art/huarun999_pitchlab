@@ -8,7 +8,8 @@ import {
   FileText, 
   Lock,
   Plus,
-  PlayCircle
+  PlayCircle,
+  ExternalLink
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { clsx } from 'clsx';
@@ -190,12 +191,44 @@ export default function ProjectDetail() {
 
         {/* RTC Reports */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-5 border-b border-gray-100 font-bold text-[15px] text-[#111] bg-gray-50/50">
-            RTC 场景报告（0）
+          <div className="p-5 border-b border-gray-100 font-bold text-[15px] text-[#111]">
+            RTC 场景报告（1）
           </div>
-          <div className="p-6 text-[13px] text-gray-400">
-            该项目暂无报告
-          </div>
+          <table className="w-full text-left text-[13px]">
+            <thead className="text-gray-500 bg-gray-50/50">
+              <tr>
+                <th className="py-3 px-6 font-medium">用户</th>
+                <th className="py-3 px-6 font-medium">人设</th>
+                <th className="py-3 px-6 font-medium">预设场景</th>
+                <th className="py-3 px-6 font-medium">RTCScene</th>
+                <th className="py-3 px-6 font-medium">创建时间</th>
+                <th className="py-3 px-6 font-medium">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
+                <td className="py-4 px-6 text-[#111]">huanglin86@999.com.cn</td>
+                <td className="py-4 px-6">
+                  <div className="flex items-center gap-1.5 text-[#3b82f6] hover:text-blue-700 cursor-pointer">
+                    林志远 <Eye size={14} className="text-gray-400 hover:text-blue-500" />
+                  </div>
+                </td>
+                <td className="py-4 px-6 text-[#111]">破冰连接 （预设）</td>
+                <td className="py-4 px-6">
+                  <div className="flex items-center gap-1.5 text-[#3b82f6] hover:text-blue-700 cursor-pointer font-mono text-[12px]">
+                    fHMzUcDz2nDfOQqk <Eye size={14} className="text-gray-400 hover:text-blue-500" />
+                  </div>
+                </td>
+                <td className="py-4 px-6 text-gray-500">2026-04-15 09:48</td>
+                <td className="py-4 px-6">
+                  <button className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-gray-700 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white">
+                    <ExternalLink size={12} className="text-gray-400" />
+                    查看报告
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* Personas and Scenes Section */}
