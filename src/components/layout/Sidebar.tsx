@@ -10,6 +10,7 @@ import {
   User as UserIcon,
   Building2,
   LayoutDashboard,
+  Layers,
   LogOut
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -153,6 +154,16 @@ export default function Sidebar() {
                 >
                   <LayoutDashboard size={18} className="text-gray-500" />
                   仪表盘
+                </button>
+                <button 
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#111] hover:bg-gray-50 transition-colors"
+                  onClick={() => {
+                    navigate('/projects');
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <Layers size={18} className="text-gray-500" />
+                  项目管理
                 </button>
                 <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#111] hover:bg-gray-50 transition-colors">
                   <Building2 size={18} className="text-gray-500" />

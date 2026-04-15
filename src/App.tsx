@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import Dashboard from './pages/Dashboard';
 import DataDashboard from './pages/DataDashboard';
+import ProjectManagement from './pages/ProjectManagement';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Navigate to="/departments" replace />} />
           <Route path="/departments" element={<Dashboard />} />
           <Route path="/dashboard" element={<DataDashboard />} />
+          <Route path="/projects" element={<ProjectManagement />} />
         </Route>
       </Routes>
     </BrowserRouter>
