@@ -1,11 +1,8 @@
 import React from 'react';
 import { 
   Users, Layers, UserCircle, PhoneCall, FileText, 
-  LayoutDashboard, Building2, Coins, Receipt, 
-  MonitorPlay, Mic, BookOpen, Calendar, Settings, 
-  MessageSquare, LayoutTemplate, Image, TrendingUp,
   Eye, UserPlus, MousePointerClick, Activity,
-  Calendar as CalendarIcon, RefreshCw
+  RefreshCw
 } from 'lucide-react';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -55,35 +52,6 @@ export default function DataDashboard() {
         <button className="px-4 py-2 border border-gray-200 bg-white rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
           返回产品首页
         </button>
-      </div>
-
-      {/* Navigation Links */}
-      <div className="bg-white rounded-xl p-4 mb-6 shadow-sm border border-gray-100">
-        <div className="flex flex-wrap gap-x-6 gap-y-4">
-          {[
-            { name: '仪表盘', icon: LayoutDashboard },
-            { name: '用户管理', icon: Users },
-            { name: '企业管理', icon: Building2 },
-            { name: '积分管理', icon: Coins },
-            { name: '计费规则', icon: Receipt },
-            { name: '项目管理', icon: Layers },
-            { name: 'RTC 场景管理', icon: MonitorPlay },
-            { name: 'Speech 管理', icon: Mic },
-            { name: '专项训练管理', icon: BookOpen },
-            { name: '每日表达-模板', icon: LayoutTemplate },
-            { name: '每日表达-日历', icon: Calendar },
-            { name: '深层配置', icon: Settings },
-            { name: 'Prompt 管理', icon: MessageSquare },
-            { name: '全局资产', icon: FileText },
-            { name: '预设图像', icon: Image },
-            { name: '留存转化看板', icon: TrendingUp },
-          ].map((item, idx) => (
-            <button key={idx} className="flex items-center gap-2 text-[13px] text-gray-700 hover:text-black transition-colors">
-              <item.icon size={16} className="text-gray-400" />
-              {item.name}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* KPI Cards */}
