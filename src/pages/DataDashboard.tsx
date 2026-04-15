@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Users, Layers, UserCircle, PhoneCall, FileText, 
   Eye, UserPlus, MousePointerClick, Activity,
-  RefreshCw
+  RefreshCw, ArrowLeft, ExternalLink, Search, ArrowUpDown
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -37,13 +37,70 @@ const barData = [
   { date: '4月15日', value: 17, new: 17, conv: 1 },
 ];
 
+const mockRtcReports = [
+  {
+    id: '1',
+    user: 'huanglin86@999.com.cn',
+    persona: '林志远',
+    scene: '破冰连接 （预设）',
+    rtcScene: 'fHMzUcDz2nDfOQqk',
+    createdAt: '2026-04-15 09:48',
+    project: '史达功儿科呼吸专科推广优化项目'
+  },
+  {
+    id: '2',
+    user: 'lixinyuan@tezign.com',
+    persona: '陈建华',
+    scene: '应对质询',
+    rtcScene: 'xK9pL2vM5nB7qW4r',
+    createdAt: '2026-04-14 15:22',
+    project: 'AI接报员-沟通实战模拟'
+  },
+  {
+    id: '3',
+    user: 'zhackai@tezign.com',
+    persona: '万谷摘',
+    scene: '清晰汇报',
+    rtcScene: 'tY3mN8cX1jP6vH9s',
+    createdAt: '2026-04-13 11:05',
+    project: '华润博雅生物联络员体系赋能与能力提升计划'
+  },
+  {
+    id: '4',
+    user: 'user7168@example.com',
+    persona: '林芯兰',
+    scene: '促成谈判',
+    rtcScene: 'aB5cD7eF9gH1iJ3k',
+    createdAt: '2026-04-12 16:40',
+    project: '基层减负增效行动'
+  },
+  {
+    id: '5',
+    user: 'vin@example.com',
+    persona: '张医生',
+    scene: '化解分歧',
+    rtcScene: 'L4mN6oP8qR0sT2uV',
+    createdAt: '2026-04-11 09:15',
+    project: '财税智链优化系统'
+  }
+];
+
 export default function DataDashboard() {
+  const [activeView, setActiveView] = useState<'overview' | 'rtc-reports'>('overview');
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] p-6 text-[#111]">
       {/* Header */}
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h1 className="text-xl font-bold mb-1">PitchLab 管理中心</h1>
+          {activeView === 'rtc-reports' ? (
+            <div className="flex items-center gap-2 mb-1 cursor-pointer hover:text-gray-600 transition-colors w-fit" onClick={() => setActiveView('overview')}>
+              <ArrowLeft size={16} />
+              <span className="text-[14px] font-medium">返回数据总览</span>
+            </div>
+          ) : (
+            <h1 className="text-xl font-bold mb-1">PitchLab 管理中心</h1>
+          )}
           <p className="text-xs text-gray-500">统一查看业务数据、管理用户与项目资源。</p>
         </div>
         <button className="px-4 py-2 border border-gray-200 bg-white rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
@@ -51,16 +108,97 @@ export default function DataDashboard() {
         </button>
       </div>
 
-      {/* KPI Cards */}
+      {activeView === 'rtc-reports' ? (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-[calc(100vh-120px)] flex flex-col">
+          {/* Header & Search */}
+          <div className="p-5 border-b border-gray-100">
+            <h2 className="text-[15px] font-bold text-[#111] mb-4">RTC 场景报告记录</h2>
+            <div className="relative max-w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+              <input 
+                type="text"
+                placeholder="搜索用户、人设或项目"
+                className="w-full pl-9 pr-4 py-2 text-[13px] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300"
+              />
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="flex-1 overflow-auto">
+            <table className="w-full text-left border-collapse min-w-[1000px]">
+              <thead className="sticky top-0 bg-gray-50/50 z-10 border-b border-gray-100">
+                <tr className="text-gray-500 text-[13px]">
+                  <th className="py-3 px-6 font-medium w-[20%]">用户</th>
+                  <th className="py-3 px-6 font-medium w-[15%]">人设</th>
+                  <th className="py-3 px-6 font-medium w-[15%]">预设场景</th>
+                  <th className="py-3 px-6 font-medium w-[20%]">所属项目</th>
+                  <th className="py-3 px-6 font-medium w-[15%]">RTCScene</th>
+                  <th className="py-3 px-6 font-medium w-[10%]">
+                    <div className="flex items-center gap-1 cursor-pointer hover:text-gray-700">
+                      创建时间 <ArrowUpDown size={12} />
+                    </div>
+                  </th>
+                  <th className="py-3 px-6 font-medium w-[5%]">操作</th>
+                </tr>
+              </thead>
+              <tbody className="text-[13px]">
+                {mockRtcReports.map((report) => (
+                  <tr key={report.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                    <td className="py-4 px-6 text-[#111]">{report.user}</td>
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-1.5 text-[#3b82f6] hover:text-blue-700 cursor-pointer w-fit">
+                        {report.persona} <Eye size={14} className="text-gray-400 hover:text-blue-500" />
+                      </div>
+                    </td>
+                    <td className="py-4 px-6 text-[#111]">{report.scene}</td>
+                    <td className="py-4 px-6 text-gray-600 truncate max-w-[200px]" title={report.project}>
+                      {report.project}
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-1.5 text-[#3b82f6] hover:text-blue-700 cursor-pointer font-mono text-[12px] w-fit">
+                        {report.rtcScene} <Eye size={14} className="text-gray-400 hover:text-blue-500" />
+                      </div>
+                    </td>
+                    <td className="py-4 px-6 text-gray-500">{report.createdAt}</td>
+                    <td className="py-4 px-6">
+                      <button className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-gray-700 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white whitespace-nowrap">
+                        <ExternalLink size={12} className="text-gray-400" />
+                        查看报告
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="p-4 border-t border-gray-100 flex items-center justify-between text-[13px]">
+            <button className="px-4 py-2 border border-gray-200 rounded-md text-gray-400 cursor-not-allowed bg-gray-50">
+              上一页
+            </button>
+            <span className="text-gray-400">第 1/193 页 · 共 964 份报告</span>
+            <button className="px-4 py-2 border border-gray-200 rounded-md text-gray-600 hover:bg-gray-50 hover:text-[#111] transition-colors">
+              下一页
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* KPI Cards */}
       <div className="grid grid-cols-5 gap-4 mb-6">
         {[
           { title: '用户总数', value: '1,928', sub: '今日新增用户', diff: '+3', icon: Users, iconBg: 'bg-blue-50', iconColor: 'text-blue-500' },
           { title: '项目总数', value: '793', sub: '今日新增项目', diff: '+3', icon: Layers, iconBg: 'bg-purple-50', iconColor: 'text-purple-500' },
           { title: '人设总数', value: '4,264', sub: '今日新增人设', diff: '+15', icon: UserCircle, iconBg: 'bg-pink-50', iconColor: 'text-pink-500' },
           { title: 'RTC 场景', value: '3,683', sub: '今日新增 RTC 场景', diff: '+7', icon: PhoneCall, iconBg: 'bg-teal-50', iconColor: 'text-teal-500' },
-          { title: 'RTC 报告', value: '964', sub: '今日新增 RTC 报告', diff: '+1', icon: FileText, iconBg: 'bg-orange-50', iconColor: 'text-orange-500' },
+          { title: 'RTC 报告', value: '964', sub: '今日新增 RTC 报告', diff: '+1', icon: FileText, iconBg: 'bg-orange-50', iconColor: 'text-orange-500', onClick: () => setActiveView('rtc-reports') },
         ].map((card, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+          <div 
+            key={idx} 
+            className={`bg-white rounded-xl p-5 shadow-sm border border-gray-100 ${card.onClick ? 'cursor-pointer hover:border-orange-200 transition-colors' : ''}`}
+            onClick={card.onClick}
+          >
             <div className="flex justify-between items-start mb-1">
               <span className="text-[13px] font-bold text-gray-500">{card.title}</span>
               <div className={`w-7 h-7 rounded-full flex items-center justify-center ${card.iconBg}`}>
@@ -335,6 +473,8 @@ export default function DataDashboard() {
           </div>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }
