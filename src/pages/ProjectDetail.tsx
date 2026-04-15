@@ -8,15 +8,15 @@ import {
   FileText, 
   Lock,
   Plus,
-  PlayCircle,
   ExternalLink
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { clsx } from 'clsx';
+import ReportModal from '../components/ReportModal';
 
 export default function ProjectDetail() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'persona' | 'scene'>('persona');
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   
   return (
     <div className="min-h-screen bg-[#F8F9FA] p-6 text-[#111]">
@@ -221,7 +221,10 @@ export default function ProjectDetail() {
                 </td>
                 <td className="py-4 px-6 text-gray-500">2026-04-15 09:48</td>
                 <td className="py-4 px-6">
-                  <button className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-gray-700 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white">
+                  <button 
+                    onClick={() => setIsReportModalOpen(true)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-gray-700 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white"
+                  >
                     <ExternalLink size={12} className="text-gray-400" />
                     查看报告
                   </button>
@@ -485,6 +488,11 @@ export default function ProjectDetail() {
           </div>
         </div>
       </div>
+
+      <ReportModal 
+        isOpen={isReportModalOpen} 
+        onClose={() => setIsReportModalOpen(false)} 
+      />
     </div>
   );
 }

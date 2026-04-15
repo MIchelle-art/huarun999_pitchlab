@@ -4,10 +4,7 @@ import {
   Eye, UserPlus, MousePointerClick, Activity,
   RefreshCw
 } from 'lucide-react';
-import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, Cell
-} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const lineData = [
   { date: '3-16', user: 10, project: 30, persona: 20, rtc: 5, report: 2 },
